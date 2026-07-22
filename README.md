@@ -10,17 +10,19 @@ repository is available at
 ## 1. Overview
 
 This release provides the core training, fusion, evaluation, and numerical
-coupling-analysis code, as well as the exact executable zero-shot LLM prompts
-used in the experiments. Because the speed-dating corpus is available only under a
-data-use agreement, this is not a self-contained reproduction package: the
+coupling-analysis code, as well as the exact executable prompts used for
+transcript-only LLM prediction through zero-shot prompting. Because the speed-dating
+corpus is available only under a data-use agreement, this is not a self-contained
+reproduction package: the
 original data, derived features, and model/API outputs are not redistributed.
 
 ### What this release can reproduce
 
 With authorized corpus access and the external inputs documented in Section 3,
-the released code covers supervised single-modality training, zero-shot LLM
-inference, conversion to a common out-of-fold prediction format, score-level
-fusion, aggregate evaluation metrics, and the numerical participant-level
+the released code covers supervised single-modality training, transcript-only
+LLM prediction through zero-shot prompting, conversion to a common out-of-fold
+prediction format, score-level fusion, aggregate evaluation metrics, and the
+numerical participant-level
 coupling analysis. Without restricted inputs, the offline unit and synthetic
 smoke tests still exercise the filename and direction semantics, split
 validation, metric definitions, held-out-fold fusion protocol, and coupling
