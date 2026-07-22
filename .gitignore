@@ -1,0 +1,10 @@
+.venv/
+__pycache__/
+*.py[cod]
+.env
+.DS_Store
+
+# Restricted or generated research artifacts
+data/*
+!data/README.md
+log/

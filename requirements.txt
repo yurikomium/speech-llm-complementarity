@@ -1,0 +1,13 @@
+torch>=2.0,<3
+torchaudio>=2.0,<3
+transformers>=4.40,<5
+sentence-transformers>=3,<6
+soundfile>=0.12,<1
+webrtcvad-wheels>=2.0,<3
+numpy>=1.24,<3
+pandas>=2.0,<3
+scipy>=1.10,<2
+matplotlib>=3.7,<4
+anthropic>=0.40,<1
+openai>=1.40,<3
+google-genai>=1,<3
