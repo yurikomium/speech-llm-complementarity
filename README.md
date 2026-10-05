@@ -1,38 +1,59 @@
 # Speech Signals Complement LLMs for Predicting Interpersonal Attraction in Speed Dating
 
-Code and reproducibility materials for the ICMI 2026 paper *Speech Signals
-Complement LLMs for Predicting Interpersonal Attraction in Speed Dating*.
+Code and reproducibility materials for our ICMI 2026 paper.
 
-This directory contains the code submitted with the paper. The maintained
-repository is available at
-<https://github.com/yurikomium/speech-llm-complementarity>.
+Yuriko Kikuchi¹, Takato Hayashi¹, Ryusei Kimura¹, Naoya Inoue¹, Ryo Ishii², and Shogo Okada¹<br>
+¹ Japan Advanced Institute of Science and Technology (JAIST) · ² NTT, Inc.
+
+[Paper (arXiv)](https://arxiv.org/abs/2607.23037) ·
+[Paper PDF](https://arxiv.org/pdf/2607.23037) ·
+[Poster (PDF)](poster.pdf) ·
+[LinkedIn — Yuriko Kikuchi](https://www.linkedin.com/in/yuriko-kikuchi/)
 
 ## 1. Overview
 
-This release provides the core training, fusion, evaluation, and numerical
-coupling-analysis code, as well as the exact executable prompts used for
-transcript-only LLM prediction through zero-shot prompting. Because the speed-dating
-corpus is available only under a data-use agreement, this is not a self-contained
-reproduction package: the
-original data, derived features, and model/API outputs are not redistributed.
+We ask whether speech adds predictive value beyond a transcript-only LLM when
+estimating how much someone likes their conversation partner. Using Japanese
+speed-dating conversations, we predict participants' self-reported liking and
+assess which partners each participant liked more.
 
-### What this release can reproduce
+We combine Claude Sonnet 4.6's zero-shot predictions from the full two-speaker
+transcript with a supervised HuBERT-based predictor using only the rater's own
+speech. Weighted score-level fusion lets us examine the speech predictor's
+additional value beyond the LLM.
 
-With authorized corpus access and the external inputs documented in Section 3,
-the released code covers supervised single-modality training, transcript-only
-LLM prediction through zero-shot prompting, conversion to a common out-of-fold
-prediction format, score-level fusion, aggregate evaluation metrics, and the
-numerical participant-level
-coupling analysis. Without restricted inputs, the offline unit and synthetic
-smoke tests still exercise the filename and direction semantics, split
-validation, metric definitions, held-out-fold fusion protocol, and coupling
-output contract.
+Fusion improves within-participant partner ordering (pairwise accuracy) over
+Claude alone in all four conditions: two conversation rounds × two rating
+directions, with all gains significant after Holm correction. However, gains
+in per-participant Pearson correlation do not survive correction for multiple
+comparisons. These findings support conditional complementarity. The specific
+speech cues responsible remain unidentified, and the evidence is limited to
+one Japanese opposite-sex speed-dating corpus.
 
-### What this release cannot reproduce by itself
+### Questions for discussion
 
-The package cannot regenerate the paper's numerical results from public inputs
-alone. It does not contain the restricted corpus, transcripts, audio, upstream
-feature artifacts, trained checkpoints, or saved LLM/API responses.
+- Which acoustic or interactional cues contribute information beyond the transcript?
+- Can we predict when the speech branch will help, without access to ground-truth liking scores?
+
+For research discussions and collaboration, connect with
+[Yuriko Kikuchi on LinkedIn](https://www.linkedin.com/in/yuriko-kikuchi/).
+
+### Using this repository
+
+The release includes supervised training, exact executable LLM prompts,
+prediction conversion, score-level fusion, evaluation, and numerical
+participant-level coupling analysis. With authorized corpus access and the
+external inputs in [Section 3](#3-restricted-inputs-and-runtime-path-contract),
+these components support the analyses listed in the
+[paper-to-code map](#5-paper-to-code-map).
+
+The corpus requires a data-use agreement. Recordings, transcripts, features,
+checkpoints, and saved API outputs are not redistributed, so this repository
+cannot reproduce the paper's numerical results from public inputs alone.
+Offline unit and synthetic smoke tests run without corpus access or paid APIs.
+
+Continue to [Setup](#2-setup), the [paper-to-code map](#5-paper-to-code-map),
+or [citation information](#9-citation).
 
 ## 2. Setup
 
@@ -327,6 +348,7 @@ speech-llm-complementarity/
 │   └── workflows/tests.yml         # offline CI
 ├── .gitignore                       # excludes restricted/generated data
 ├── README.md                       # this file
+├── poster.pdf                      # ICMI 2026 conference poster
 ├── LICENSE                         # MIT License for original software code
 ├── THIRD_PARTY_NOTICES.md          # excluded third-party materials
 ├── requirements.txt
@@ -397,6 +419,7 @@ license.
 
 If you use this software, cite the accompanying ICMI 2026 paper. Machine-readable
 metadata and the current author order are provided in [`CITATION.cff`](CITATION.cff).
+An open-access version is available on [arXiv](https://arxiv.org/abs/2607.23037).
 The paper DOI is
 [`10.1145/3776574.3831151`](https://doi.org/10.1145/3776574.3831151).
 An archival artifact DOI will be added after it is issued.
